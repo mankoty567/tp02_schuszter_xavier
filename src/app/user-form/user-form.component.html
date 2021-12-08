@@ -1,0 +1,182 @@
+<div class="center">
+  <div class="card formStyle" style="width: 18rem" [hidden]="submitted">
+    <form id="formClient" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="firstname">Nom : </label>
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          [(ngModel)]="user.firstname"
+          required
+        />
+        <div
+          *ngIf="!user.firstname && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le nom est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="lastname">Prénom : </label>
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          [(ngModel)]="user.lastname"
+          required
+        />
+        <div
+          *ngIf="!user.lastname && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le prénom est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="address">Adresse : </label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          [(ngModel)]="user.address"
+          required
+        />
+        <div *ngIf="!user.address && nbSubmit !== 0" class="alert alert-danger">
+          L'adresse est requise.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="postalCode">Code postal : </label>
+        <input
+          type="text"
+          id="postalCode"
+          name="postalCode"
+          pattern="[0-9]"
+          title="Code postal contenant uniquement des chiffres"
+          [(ngModel)]="user.postalCode"
+          required
+        />
+        <div
+          *ngIf="!user.postalCode && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le code postal est requise.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="tel">Téléphone : </label>
+        <input
+          type="text"
+          id="tel"
+          name="tel"
+          pattern="[0-9]"
+          title="Numéro de téléphone contenant que des chiffres"
+          [(ngModel)]="user.tel"
+          maxlength="10"
+          required
+        />
+        <p [hidden]="user.tel.length !== 10">
+          Numéro formatté : {{ user.tel | phonePipe }}
+        </p>
+        <div *ngIf="!user.tel && nbSubmit !== 0" class="alert alert-danger">
+          Le numéro de téléphone est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="mail">Email : </label>
+        <input
+          type="text"
+          id="mail"
+          name="mail"
+          [(ngModel)]="user.mail"
+          required
+        />
+        <div *ngIf="!user.mail && nbSubmit !== 0" class="alert alert-danger">
+          L'email est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="civ">Civilité : </label>
+        <input
+          type="text"
+          id="civ"
+          name="civ"
+          [(ngModel)]="user.civ"
+          required
+        />
+        <div *ngIf="!user.civ && nbSubmit !== 0" class="alert alert-danger">
+          La civilité est requise.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="login">Login : </label>
+        <input
+          type="text"
+          id="login"
+          name="login"
+          [(ngModel)]="user.login"
+          required
+        />
+        <div *ngIf="!user.login && nbSubmit !== 0" class="alert alert-danger">
+          Le login est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password">Mot de passe : </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="user.password"
+          required
+        />
+        <div
+          *ngIf="!user.password && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le mot de passe est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="passwordConfirm">Confirmer le mot de passe : </label>
+        <input
+          type="password"
+          id="passwordConfirm"
+          name="passwordConfirm"
+          [(ngModel)]="user.passwordConfirm"
+          required
+        />
+        <div
+          *ngIf="!user.passwordConfirm && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          La confirmation du mot de passe est requise.
+        </div>
+        <div
+          *ngIf="user.passwordConfirm !== user.password && user.passwordConfirm"
+          class="alert alert-danger"
+        >
+          Le mot de passe doit être identique.
+        </div>
+      </div>
+
+      <div class="center">
+        <button type="submit" id="submit" class="btn btn-primary">
+          Valider
+        </button>
+      </div>
+    </form>
+    <span class="invalid-feedback"></span>
+  </div>
+  <app-user-result [user]="user" [isSubmitted]="submitted"></app-user-result>
+</div>
