@@ -1,18 +1,20 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { user } from './user';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, Pipe, PipeTransform } from "@angular/core";
+import { user } from "./user";
+import { FormsModule } from "@angular/forms";
+import { ClientServiceService } from "./client-service.service";
 
 @Component({
-  selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.css'],
+  selector: "app-user-form",
+  templateUrl: "./user-form.component.html",
+  styleUrls: ["./user-form.component.css"],
+  providers: [ClientServiceService],
 })
 export class UserFormComponent implements OnInit {
-  constructor() {}
+  constructor(private userService: ClientServiceService) {}
 
   ngOnInit(): void {}
 
-  user: user = new user('', '', '', '', '', '', '', '', '', '');
+  user: user = new user("", "", "", "", "", "", "", "", "", "");
   submitted: boolean = false;
   nbSubmit: number = 0;
 
@@ -32,15 +34,15 @@ export class UserFormComponent implements OnInit {
 
 //Ligne trouvée sur learnersBucket pour l'algo
 @Pipe({
-  name: 'phonePipe',
+  name: "phonePipe",
 })
 export class PhonePipe implements PipeTransform {
   transform(str: string) {
-    let cleaned: string = ('' + str).replace(/\D/g, '');
+    let cleaned: string = ("" + str).replace(/\D/g, "");
     let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
 
     if (match) {
-      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+      return "(" + match[1] + ") " + match[2] + "-" + match[3];
     }
 
     return null;
